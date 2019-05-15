@@ -1,4 +1,5 @@
 """
+For CIRCUITPLAYGROUND_EXPRESS
 Easily make a circuitplayground express into a low-information pomodoro timer! 
 The point is to have a background pomodoro timer that doesn't display an actual time amount, 
 which can break your flow.  
@@ -12,6 +13,7 @@ After you reach the end of the period, the board will begin to blink to let you 
 
 You can find out how many Pomodoros you have completed by pressing the button and counting the chimes
 """
+
 import time
 from adafruit_circuitplayground.express import cpx
 from random import random
@@ -74,8 +76,8 @@ while True:
     if not pixel_order:
         # We're over-time so let's flash brightness to remind the human to switch
         # Flash speed is related to how long overtime we have gone
-        flash_speed = 60 / (points_to_distribute / 100)  # seconds to flash
-        cpx.pixels.brightness = 0.4 * cos(linger_time / flash_speed)
+        flash_speed = 10 / ((points_to_distribute + 1) / 100)  # seconds to flash
+        cpx.pixels.brightness = 0.4 * cos(3.14 * linger_time / flash_speed)
         print(cpx.pixels.brightness)
         cpx.pixels.show()
 
