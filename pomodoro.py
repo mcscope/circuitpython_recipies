@@ -1,12 +1,21 @@
-"""For a detailed guide on all the features of the Circuit Playground Express (cpx) library:
-https://adafru.it/cp-made-easy-on-cpx"""
+"""
+Easily make a circuitplayground express into a low-information pomodoro timer! 
+The point is to have a background pomodoro timer that doesn't display an actual time amount, 
+which can break your flow.  
+
+Slide the switch to change between pomodoro mode and break mode. 
+Break period is set to 8 minutes by default with Green leds,
+ work period to 25 with Red leds
+
+As the time elapses, more leds will slowly turn on to give you a sense of your progress through time.
+After you reach the end of the period, the board will begin to blink to let you know, in a low-information way, that you're over.
+
+You can find out how many Pomodoros you have completed by pressing the button and counting the chimes
+"""
 import time
-import microcontroller
 from adafruit_circuitplayground.express import cpx
 from random import random
 from math import cos
-# Set TONE_PIANO to True to enable a tone piano on the touch pads!
-TONE_PIANO = False
 
 # Set this as a float from 0 to 1 to change the brightness. The decimal represents a percentage.
 # So, 0.3 means 30% brightness!
@@ -19,23 +28,6 @@ cpx.pixels.auto_write = False
 def shuffle(seq):
     return sorted(seq, key=lambda x: random())
 
-
-def color_wheel(pos):
-    # Input a value 0 to 255 to get a color value.
-    # The colours are a transition red - green - blue - back to red.
-    if pos < 0 or pos > 255:
-        return (0, 0, 0)
-    if pos < 85:
-        return (int(255 - pos * 3), int(pos * 3), 0)
-    if pos < 170:
-        pos -= 85
-        return (0, int(255 - pos * 3), int(pos * 3))
-    pos -= 170
-    return (int(pos * 3), 0, int(255 - (pos * 3)))
-
-
-color_index = 0
-pixel_number = 0
 
 MINUTE = 60
 WORK_LENGTH = 25 * MINUTE
@@ -118,22 +110,3 @@ while True:
     elif cpx.button_b:
         for x in range(total_pomos):
             cpx.play_file("low_fade.wav")
-
-    # Set TONE_PIANO to True above to enable a tone piano on the touch pads!
-    if TONE_PIANO:
-        if cpx.touch_A1:
-            cpx.start_tone(262)
-        elif cpx.touch_A2:
-            cpx.start_tone(294)
-        elif cpx.touch_A3:
-            cpx.start_tone(330)
-        elif cpx.touch_A4:
-            cpx.start_tone(349)
-        elif cpx.touch_A5:
-            cpx.start_tone(392)
-        elif cpx.touch_A6:
-            cpx.start_tone(440)
-        elif cpx.touch_A7:
-            cpx.start_tone(494)
-        else:
-            cpx.stop_tone()

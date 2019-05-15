@@ -1,3 +1,4 @@
+# This code was originally distributed on the PyCon 2019 Circuit Playground Swag boards
 """For a detailed guide on all the features of the Circuit Playground Express (cpx) library:
 https://adafru.it/cp-made-easy-on-cpx"""
 import time
