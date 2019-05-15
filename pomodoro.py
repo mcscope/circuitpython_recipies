@@ -42,7 +42,7 @@ state_start = start
 is_pomo = cpx.switch
 pixel_order = shuffle(list(range(10)))
 pomo_pixels = [0] * 10
-total_pomos = 0
+total_pomos = 1
 
 while True:
     old_is_pomo = is_pomo
